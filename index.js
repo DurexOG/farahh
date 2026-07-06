@@ -33,7 +33,14 @@ async function start() {
     });
 
     // Boot
-    await client.initializeMongoose();
+    
+    try {
+      await client.initializeMongoose();
+      console.log("✅ Database Connected")
+    } catch (error) {
+      console.warn("⚠️ Database Unavailiable, Starting wihout MongoDB.");
+    }
+
     await client.loadEvents();
     await client.loadMain();
 
